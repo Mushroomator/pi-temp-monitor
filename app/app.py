@@ -1,0 +1,31 @@
+#!/usr/bin/python3
+
+from flask import Flask, render_template, jsonify
+import datetime
+import time
+from gpiozero import CPUTemperature, TimeOfDay
+import os
+
+app = Flask(__name__)
+
+@app.route("/")
+def index(): 
+    return render_template("index.html")
+
+@app.route("/temp")
+def getTemp():
+    tempFile = open( "/sys/class/thermal/thermal_zone0/temp" )
+    cpu_temp = tempFile.read()
+    tempFile.close()
+    return jsonify(float(cpu_temp)/1000)
+#    temp = os.system("vcgencmd measure_temp")
+#    return temp[5:-2]
+#    return CPUTemperature(min_temp=0, max_temp=3983932).temperature
+
+@app.route("/time")
+def getTime():
+    return jsonify(datetime.datetime.now().strftime("%H:%M:%S"))
+
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0')
+

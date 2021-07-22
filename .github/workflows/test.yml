@@ -11,7 +11,7 @@ on:
   # enable manual trigger button in Github Web UI  
   workflow_dispatch:
     inputs:
-      gae-version: 
+      gaeVersion: 
         description: 'GAE Version ID (Leave empty to use current commit SHA)'
         required: false
         # by default (or when the workflow is automatically triggered) set version to Github commit hash
@@ -25,20 +25,22 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Cat for GitHub Actions
+      uses: pCYSl5EDgo/cat@1.0.0
+
     - name: test env
       run: |
           echo "Print values of environment variable and file"
-          echo $INPUT_GAE-VERSION
-          echo $GITHUB_ENV
-          echo $GITHUB_SHA
+          echo $INPUT_GAEVERSION
           cat $GITHUB_ENV
+        
         
       
     - name: change value
-      run: echo "INPUT_GAE-VERSION=someval" >> $GITHUB_ENV
+      run: echo "INPUT_GAEVERSION=someval" >> $GITHUB_ENV
       
     - name: test test
       run: | 
            echo "Print values of environment variable and file"
-           echo $INPUT_GAE_VERSION
+           echo $INPUT_GAEVERSION
            cat $GITHUB_ENV

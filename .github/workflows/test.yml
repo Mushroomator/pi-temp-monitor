@@ -26,10 +26,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: test env
-      run: echo $INPUT_GAE_VERSION && cat $GITHUB_ENV
+      run: |
+          echo "Print values of environment variable and file"
+          echo $INPUT_GAE_VERSION
+          cat $GITHUB_ENV
       
     - name: change value
       run: INPUT_GAE_VERSION=testval
       
     - name: test test
-      run: echo $INPUT_GAE_VERSION && cat $GITHUB_ENV
+      run: | 
+           echo "Print values of environment variable and file"
+           echo $INPUT_GAE_VERSION
+           cat $GITHUB_ENV

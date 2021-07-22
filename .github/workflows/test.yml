@@ -29,7 +29,10 @@ jobs:
       run: |
           echo "Print values of environment variable and file"
           echo $INPUT_GAE_VERSION
+          echo $GITHUB_ENV
+          echo $GITHUB_SHA
           cat $GITHUB_ENV
+        
       
     - name: change value
       run: INPUT_GAE_VERSION=testval

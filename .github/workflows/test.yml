@@ -25,14 +25,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Cat for GitHub Actions
-      uses: pCYSl5EDgo/cat@1.0.0
 
     - name: test env
       run: |
           echo "Print values of environment variable and file"
           echo $INPUT_GAEVERSION
-          cat $GITHUB_ENV
+          echo $(cat $GITHUB_ENV)
         
         
       
@@ -43,4 +41,4 @@ jobs:
       run: | 
            echo "Print values of environment variable and file"
            echo $INPUT_GAEVERSION
-           cat $GITHUB_ENV
+           echo $(cat $GITHUB_ENV)

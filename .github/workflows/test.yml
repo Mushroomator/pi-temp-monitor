@@ -1,0 +1,35 @@
+# This workflow will upload a Python Package using Twine when a release is created
+# For more information see: https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions#publishing-to-package-registries
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Test Action
+on:
+  # enable manual trigger button in Github Web UI  
+  workflow_dispatch:
+    inputs:
+      gae-version: 
+        description: 'GAE Version ID (Leave empty to use current commit SHA)'
+        required: false
+        # by default (or when the workflow is automatically triggered) set version to Github commit hash
+        # this version can after successful deployment then by viewed under https://<gae-version>-dot-jsonschematool.ew.r.appspot.com/
+        default: ""
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: test env
+      run: echo $INPUT_GAE_VERSION && cat $GITHUB_ENV
+      
+    - name: change value
+      run: INPUT_GAE_VERSION=testval
+      
+    - name: test test
+      run: echo $INPUT_GAE_VERSION && cat $GITHUB_ENV
